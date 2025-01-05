@@ -1,0 +1,11 @@
+[general]
+bars = 0
+bar_width = 1.0
+bar_spacing = 0.5
+
+#[output]
+#method = raw
+#data_format = ascii
+
+[color]
+foreground = '#fc78cc'

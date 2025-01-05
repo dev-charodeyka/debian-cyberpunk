@@ -1,0 +1,42 @@
+#! /bin/sh
+
+#SXHKD Launching
+pgrep -x sxhkd > /dev/null || sxhkd -c "/etc/xdg/bspwm/sxhkdrc" &
+
+#DISPLAY env import
+systemctl --user import-environment DISPLAY
+
+#Starting XDG Desktop portal
+systemctl --user start xdg-desktop-portal
+
+#Starting wireplumber
+systemctl --user restart wireplumber
+systemctl --user restart pipewire
+#DUNST Launching
+systemctl --user start dunst
+
+#Polybar Launching
+/etc/xdg/polybar/launch.sh &
+
+#Picom launching
+picom --config /etc/xdg/picom/picom.conf &
+#settiong bg color so picom does not use gray
+hsetroot -solid '#fc78ca'
+
+#restoring wallpaper
+nitrogen --restore &
+
+#setting a cursor
+xsetroot -cursor_name left_ptr
+
+bspc monitor -d 01 02 03 04 05 
+
+bspc config border_width         2
+bspc config window_gap          15
+
+bspc config focused_border_color \#fc78ca
+bspc config normal_border_color \#181c35
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
